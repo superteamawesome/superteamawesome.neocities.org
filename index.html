@@ -84,6 +84,18 @@
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
       }
       
+      @-webkit-keyframes wiggle {
+      	0% {-webkit-transform:rotate(10deg);}
+      	50% {-webkit-transform:rotate(-10deg);}
+      	100% {-webkit-transform:rotate(10deg);}
+      }
+      
+      .fireworks {
+        position: absolute;
+        z-index: 9000;
+        -webkit-animation: wiggle 0.5s infinite;
+      }
+      
     </style>
 
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -139,6 +151,42 @@
         new WordsOfEncouragement();
         new WordsOfEncouragement();
         new WordsOfEncouragement();
+        
+        Fireworks = function(which) {
+          var $el = $("#" + which);
+          
+          var random_top = function() {
+            return Math.floor((Math.random() * (window.outerHeight - 300)));
+          }
+          
+          var random_left = function() {
+            return Math.floor((Math.random() * (window.outerWidth - 311)));
+          }
+          
+          var random_wait = function() {
+            return Math.floor((Math.random() * ((4000 - 2000) + 2000)));
+          }
+          
+          var wait_for_loop = function() {
+            $el.hide();
+            setTimeout(loop, random_wait());
+          }
+          
+          var loop = function() {
+            $el.hide();
+            var topv = random_top(),
+                leftv = random_left();
+            $el.css({ top: topv, left: leftv });
+            $el.show();
+            setTimeout(wait_for_loop, random_wait());
+          }
+          
+          loop();
+        }
+        
+        new Fireworks("red_fireworks");
+        // just wanna offset the fireworks a bit
+        setTimeout(function() { new Fireworks("white_fireworks"); }, 1500);
 
       });
 
@@ -152,6 +200,14 @@
 
     <div id="volcano_wrap">
         <img src="Super_team_awesome.png" id="volcano" />
+    </div>
+    
+    <div id="red_fireworks" class="fireworks" style="display:none;">
+      <img src="red-fireworks.png" height="300" width="311" />
+    </div>
+    
+    <div id="white_fireworks" class="fireworks" style="display:none;">
+      <img src="white-fireworks.png" height="300" width="311" />
     </div>
 
     <div id="dead">
