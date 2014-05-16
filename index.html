@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>SUPER TEAM AWESOME</title>
+    <style type="text/css">
+      /* This is a CSS comment. CSS is how you can add style to your website, such as colors, fonts,
+         and positioning of your HTML content.
+         See http:// for more info. */
+
+      html, body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #48f;
+      }
+
+      #dead {
+        position: absolute;
+        top: 50%;
+        height: 1px;
+        width: 100%;
+        display: none;
+      }
+
+      #center {
+        position: absolute;
+        left: 50%;
+        margin-left: -438px;
+        margin-top: -72px;
+      }
+
+      #volcano_wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        padding-top: 50px;
+      }
+
+      #volcano {
+        height: 700px;
+        -webkit-animation-name: spew;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-duration: 1.0s;
+      }
+
+      video { 
+        position: absolute;
+        height: 100%;
+        min-width: 100%;
+        background-image: url('/images/homepage/video-background.jpg' );
+        background-size: cover;
+        background-position: center center;
+
+        object-fit: contain;
+
+      }
+
+      @-webkit-keyframes spew {
+        50% {
+          -webkit-transform: scale(0.8);
+        }
+
+      }
+
+      .encourage {
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-animation-name: spew;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-duration: 0.8s;
+
+        text-align: center;
+        font-family: "Museo";
+        font-size: 60px;
+        color: #fff;
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+      }
+      
+    </style>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        WordsOfEncouragement = function(){
+          var height  = 72;
+          var width   = 270;
+          var element = $("<div class='encourage'>Super!</div>")
+          var time    = 1500;
+
+          var list    = ["Great!", "Phenomenal!", "Superb!", "Cool!", "Out Of Sight!", "Excellent!", "Unbelievable Work!", "Two Thumbs Up!", "You've Got It!", "Way To Go!", "Terrific!", "Outstanding Performance!", "You've Outdone Yourself!", "Marvelous!", "Your Help Counts!", "Amazing Effort!", "Bravo!", "Exceptional!", "Breathtaking!", "Wonderful!", "You're Special!", "Keep Up The Good Work!", "First Rate Work!", "Fantastic Work!", "You Should Be Proud!", "I Knew You Had It In You!", "Very Good!", "Stupendous!", "Sensational!", "A+ Work!", "What An Imagination!", "Awesome!", "You're A Great Example For Others!", "You Made It Happen!", "You're A Real Trooper!", "It Couldn't Be Better!", "Good For You!", "You're A Good Sport!", "You Made The Difference!", "Take A Bow!", "Super Job!", "You're Unique!", "It's Everything I Hoped For!", "How Thoughtful Of You!", "Nice Going!", "You're A Class Act!", "Well Done!", "You're Inspiring!", "How Artistic!", "You Go The Extra Mile!", "Hooray For You!", "Great Answer!", "You Deserve A Hug!", "High Five!", "Extra Special Work!", "Wow!", "You're Getting Better!", "You're Tops!", "You're Amazing!", "What A Great Idea!", "You Figured It OutYou've Got What It Takes!", "You're Neat!", "You're A Joy!", "You're A Shining Star!", "Spectacular Work!", "You're #1!", "You Tried Hard!", "The Time You Put In Really Shows!", "Remarkable!", "Far Out!", "How Extraordinary!", "You're A Winner!", "You Came Through!", "That's Incredible!", "5 Star Work!", "You're Super!", "You Can Do It!", "You're The Greatest!", "Sweet!", "Great Effort!", "How Original!", "What A Genius!", "You're A Natural!", "Very Brave!", "You're A Pleasure To Know!", "Way To Go!", "You're Sharp!", "Congratulations!", "I'm Proud Of You!", "Thank You For Caring!", "I'm Impressed!", "You're Very Talented!", "Great Discovery!", "You're A Champ!", "Right On!", "You're So Kind!", "Thanks For Helping!", "You're A-OK!", "Magnificent!", "You've Earned My Respect!", "You've Made Progress!", "Outstanding Effort!", "Neat Work!", "I Love It!", "Beautiful!", "Clever!", "Brilliant!", "That's Perfect!", "Right On!", "Your Best Work!", "Expressive!", "You've Improved!", "Keep It Up!", "Nice One!", "Wicked!", "Incomparable!", "Incredible!", "I Appreciate Your Help!", "Good Leadership!", "Great Job!", "Stunning!", "You Rule!", "That's Very Kind!", "Keep On Trying!", "You Make Me Smile!", "You Rock!", "You're An Angel!", "That's The Way!", "Good For You!", "A Job Well Done!", "You're A Good Friend!", "Way To Use Your Head!", "Radical!", "Alright!", "You're Very Patient!", "Wonderful!", "Way To Be Responsible!", "Getting Better All The Time!", "Worthy Of An Oscar!", "Better Than Ever!", "Super Duper!", "Great Dedication!", "Top Notch!", "Hats Off To You!", "Spectacular!", "Good Try!", "Very Courageous!", "I Like It!", "Great Enthusiasm!", "Lovely!", "Very Resourceful!", "It's A Masterpiece!", "Glorious!", "Go Team!"];
+
+          var show = function(){
+            element.show();
+          };
+
+          var hide = function(){
+            element.hide();
+          };
+
+          var random_index = function(top_value){
+            return Math.floor((Math.random()*(top_value))); 
+          };
+
+          var random_encouragement = function(){
+            return list[random_index(list.length)];
+          }
+
+          var shift_text = function(){
+            //list.push(list.shift());
+            element.html(random_encouragement());
+          };
+
+          var loop = function(){
+            move();
+            shift_text();
+            show();
+            setTimeout(hide, time * (4 / 5))
+            setTimeout(loop, time)
+          };
+
+          var move = function(){
+            // Math.floor((Math.random()*100)+1); 
+            element.css('top',  Math.floor((Math.random()*(window.outerHeight - height * 2))) );
+            element.css('left',  Math.floor((Math.random()*(window.outerWidth - width))) );
+          };
+
+          $('body').append(element);
+          loop();
+        }
+
+        new WordsOfEncouragement();
+        new WordsOfEncouragement();
+        new WordsOfEncouragement();
+
+      });
+
+
+    </script>
+  </head>
+  <body>
+    <video id="ContentPlaceHolderDefault_ContentPlaceHolder_HeaderVideo" class="video-background" autoplay="autoplay" loop="loop" autobuffer="autobuffer" muted="muted">
+        <source src="http://vimeo.com/5440761/download?t=1400206242&amp;v=4177526&amp;s=1c10965ee60027d91d0705ca36847e31" type="video/mp4">
+    </video>
+
+    <div id="volcano_wrap">
+        <img src="Super_team_awesome.png" id="volcano" />
+    </div>
+
+    <div id="dead">
+      <div id="center">
+        <img src="cooltext.gif" width="876" height="144" />
+      </div>
+    </div>
+  </body>
+</html>
